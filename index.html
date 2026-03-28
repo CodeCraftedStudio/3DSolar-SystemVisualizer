@@ -376,8 +376,11 @@
         <p id="tour-planet-stats"></p>
     </div>
 
-    <div id="audio-toggle" style="position: absolute; bottom: 20px; left: 20px; z-index: 100; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; display: flex; align-items: center; gap: 8px;">
-        <div id="audio-icon" style="width: 24px; height: 24px; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">🔇</div>
+    <div id="audio-toggle"
+        style="position: absolute; bottom: 20px; left: 20px; z-index: 100; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; display: flex; align-items: center; gap: 8px;">
+        <div id="audio-icon"
+            style="width: 24px; height: 24px; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">
+            🔇</div>
         <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px;">Space Ambience</span>
     </div>
 
@@ -1051,14 +1054,14 @@
                     baseRadius: data.radius,
                     rotSpeed: 0.002
                 });
-                
+
                 // Add HTML Label for the Sun
                 const label = document.createElement('div');
                 label.className = 'planet-label';
                 label.textContent = data.name;
                 labelsContainer.appendChild(label);
                 labels.push({ el: label, mesh: sun });
-                
+
                 return;
             }
 
@@ -1420,19 +1423,19 @@
         function createNebula() {
             const group = new THREE.Group();
             const loader = new THREE.TextureLoader();
-            
+
             // Generate a simple noise-based nebula sprite on canvas
             const canvas = document.createElement('canvas');
             canvas.width = 512;
             canvas.height = 512;
             const ctx = canvas.getContext('2d');
-            
+
             const grad = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
             grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
             grad.addColorStop(0.2, 'rgba(200, 150, 255, 0.4)');
             grad.addColorStop(0.5, 'rgba(100, 50, 255, 0.1)');
             grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            
+
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, 512, 512);
 
@@ -1478,7 +1481,7 @@
         const kuiperCount = 4000;
         const kuiperPos = new Float32Array(kuiperCount * 3);
         const kuiperColors = new Float32Array(kuiperCount * 3);
-        
+
         for (let i = 0; i < kuiperCount; i++) {
             const r = 220 + Math.random() * 80;
             const theta = Math.random() * Math.PI * 2;
@@ -1495,7 +1498,7 @@
         }
         kuiperGeo.setAttribute('position', new THREE.BufferAttribute(kuiperPos, 3));
         kuiperGeo.setAttribute('color', new THREE.BufferAttribute(kuiperColors, 3));
-        
+
         const kuiperMat = new THREE.PointsMaterial({
             size: 0.8,
             vertexColors: true,
@@ -1511,7 +1514,7 @@
         const comets = [];
         function createComet() {
             const group = new THREE.Group();
-            
+
             const headGeo = new THREE.SphereGeometry(0.5, 8, 8);
             const headMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
             const head = new THREE.Mesh(headGeo, headMat);
@@ -1522,9 +1525,9 @@
             const tailGeo = new THREE.BufferGeometry();
             const tailPos = new Float32Array(tailCount * 3);
             const tailSizes = new Float32Array(tailCount);
-            
-            for(let i=0; i<tailCount; i++) {
-                tailSizes[i] = (1.0 - i/tailCount) * 2.0;
+
+            for (let i = 0; i < tailCount; i++) {
+                tailSizes[i] = (1.0 - i / tailCount) * 2.0;
             }
             tailGeo.setAttribute('position', new THREE.BufferAttribute(tailPos, 3));
             tailGeo.setAttribute('size', new THREE.BufferAttribute(tailSizes, 1));
@@ -1565,7 +1568,7 @@
             return { group, head, tail, tailPos, orbitRadius, speed, angle, tilt };
         }
 
-        for(let i=0; i<3; i++) {
+        for (let i = 0; i < 3; i++) {
             const comet = createComet();
             scene.add(comet.group);
             comets.push(comet);
@@ -1582,7 +1585,7 @@
 
         function initAudio() {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
+
             // Master gain
             ambientGain = audioCtx.createGain();
             ambientGain.gain.setValueAtTime(0, audioCtx.currentTime);
@@ -1592,10 +1595,10 @@
             const drone = audioCtx.createOscillator();
             drone.type = 'sine';
             drone.frequency.setValueAtTime(55, audioCtx.currentTime); // A1
-            
+
             const droneGain = audioCtx.createGain();
             droneGain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            
+
             drone.connect(droneGain);
             droneGain.connect(ambientGain);
             drone.start();
@@ -1605,7 +1608,7 @@
                 const osc = audioCtx.createOscillator();
                 osc.type = 'triangle';
                 osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                
+
                 const filter = audioCtx.createBiquadFilter();
                 filter.type = 'lowpass';
                 filter.frequency.setValueAtTime(200, audioCtx.currentTime);
@@ -1635,7 +1638,7 @@
 
         audioToggle.addEventListener('click', () => {
             if (!audioCtx) initAudio();
-            
+
             if (isAudioPlaying) {
                 ambientGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
                 audioIcon.textContent = '🔇';
@@ -1922,6 +1925,9 @@
             detMass.textContent = data.stats.mass;
             detAtmos.textContent = data.stats.atmos;
 
+            tourPlanetName.textContent = data.name.toUpperCase();
+            tourPlanetStats.textContent = `DIST: ${data.stats.dist} | ORBIT: ${data.stats.orbit} | MASS: ${data.stats.mass}`;
+
             detailsOverlay.classList.add('active');
         }
 
@@ -1938,6 +1944,9 @@
                 tourTimer = 0;
                 document.getElementById('speed').value = 0.2;
                 document.getElementById('speed').dispatchEvent(new Event('input'));
+
+                showPlanetDetails(tourIndex);
+
                 tourInfoPanel.style.opacity = '1';
                 uiPanel.style.opacity = '0.3';
             } else {
@@ -1994,26 +2003,29 @@
                 const x = Math.cos(comet.angle) * comet.orbitRadius;
                 const z = Math.sin(comet.angle) * comet.orbitRadius;
                 const y = Math.sin(comet.angle) * comet.orbitRadius * Math.tan(comet.tilt);
-                
+
                 comet.group.position.set(x, y, z);
-                
+
                 const nextAngle = comet.angle + 0.01;
                 const nx = Math.cos(nextAngle) * comet.orbitRadius;
                 const nz = Math.sin(nextAngle) * comet.orbitRadius;
                 const ny = Math.sin(nextAngle) * comet.orbitRadius * Math.tan(comet.tilt);
-                const dir = new THREE.Vector3(nx-x, ny-y, nz-z).normalize();
-                
-                for(let i=0; i<200; i++) {
+                const dir = new THREE.Vector3(nx - x, ny - y, nz - z).normalize();
+
+                for (let i = 0; i < 200; i++) {
                     const factor = i * 0.5;
-                    comet.tailPos[i*3] = -dir.x * factor;
-                    comet.tailPos[i*3+1] = -dir.y * factor;
-                    comet.tailPos[i*3+2] = -dir.z * factor;
+                    comet.tailPos[i * 3] = -dir.x * factor;
+                    comet.tailPos[i * 3 + 1] = -dir.y * factor;
+                    comet.tailPos[i * 3 + 2] = -dir.z * factor;
                 }
                 comet.tail.geometry.attributes.position.needsUpdate = true;
             });
 
             // Update Planets
             planets.forEach((p, i) => {
+                p.mesh.rotation.y += p.rotSpeed * timeSpeed;
+                if (i === 0) return; // The Sun stays at (0, 0, 0)
+
                 p.angle += p.speed * timeSpeed;
                 if (p.orbitLineMat) {
                     p.orbitLineMat.uniforms.planetAngle.value = p.angle;
@@ -2027,7 +2039,6 @@
                 const py = Math.sin(p.angle) * a * Math.sin(p.inclination * (Math.PI / 180));
 
                 p.mesh.position.set(px, py, pz);
-                p.mesh.rotation.y += p.rotSpeed * timeSpeed;
 
                 if (p.cloudsMesh) {
                     p.cloudsMesh.position.copy(p.mesh.position);
@@ -2117,4 +2128,5 @@
         animate();
     </script>
 </body>
+
 </html>
