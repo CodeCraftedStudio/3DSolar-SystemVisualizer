@@ -41,21 +41,21 @@ A high-fidelity, interactive 3D simulation of our solar system built with **Thre
 
 ## 🔭 Included Celestial Bodies
 
-1.  **The Sun**: The glowing center with custom surface noise and corona.
-2.  **Mercury**: Craters and rocky surface.
-3.  **Venus**: Thick, glowing atmosphere.
-4.  **Earth**: Our home, featuring clouds and realistic lighting.
-5.  **Mars**: The Red Planet with surface detail.
-6.  **Jupiter**: A massive gas giant with shifting turbulent bands.
-7.  **Saturn**: Featuring realistic, programmatically generated rings.
-8.  **Uranus & Neptune**: Distant gas giants with distinct colorations.
+1. **The Sun**: The glowing center with custom surface noise and corona.
+2. **Mercury**: Craters and rocky surface.
+3. **Venus**: Thick, glowing atmosphere.
+4. **Earth**: Our home, featuring clouds and realistic lighting.
+5. **Mars**: The Red Planet with surface detail.
+6. **Jupiter**: A massive gas giant with shifting turbulent bands.
+7. **Saturn**: Featuring realistic, programmatically generated rings.
+8. **Uranus & Neptune**: Distant gas giants with distinct colorations.
 
 ---
 
 ## 🚀 How to Run
 
-1.  **Directly**: Open `solar_system.html` in any modern web browser (Chrome, Edge, Firefox, etc.).
-2.  **Local Server (Recommended)**: For optimal performance and to handle potential CORS issues with textures/assets, use a local server like:
+1. **Directly**: Open `solar_system.html` in any modern web browser (Chrome, Edge, Firefox, etc.).
+2. **Local Server (Recommended)**: For optimal performance and to handle potential CORS issues with textures/assets, use a local server like:
     - `python -m http.server`
     - `npx serve`
     - `Live Server` extension in VS Code.
@@ -71,6 +71,7 @@ The visualizer is fully responsive! The UI adapts for mobile devices, moving con
 ## 🔗 Related Projects
 
 In this workspace, you'll also find specialized visualizers:
+
 - **`saturn.html`**: A focused 3D model of Saturn with high-fidelity ring geometry.
 - **`flight_visualizer.html`**: A 3D Earth-based flight tracker and visualizer.
 
@@ -79,4 +80,4 @@ In this workspace, you'll also find specialized visualizers:
 > [!NOTE]  
 > This project was designed to showcase the power of modern WebGL and Three.js in creating immersive educational tools.
 
-Developed by **Abir Hasan Siam** (DeepMind) 🚀
+Developed by **Antigravity** (DeepMind) 🚀
